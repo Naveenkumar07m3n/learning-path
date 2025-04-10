@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assetsf/fonts/Roboto.ttf",
+      "sha1": "24b1d43d5a9474855065b0386695797ebca6d1bc"
+    },
+    {
+      "path": "assetsf/fonts/Roboto_Condensed-Black.ttf",
+      "sha1": "317f765e1f770c422243ccdd7d0b8cf408c58db4"
+    },
+    {
+      "path": "assetsf/fonts/Roboto_Condensed-ExtraBold.ttf",
+      "sha1": "e409e2cdf444475cafdb76c5ae26721e96483553"
+    },
+    {
+      "path": "assetsf/fonts/Roboto_Condensed-ExtraBoldItalic.ttf",
+      "sha1": "95500c4ad3305d0843fcce607e0748491f6b74f1"
+    },
+    {
+      "path": "assetsf/fonts/Roboto_Condensed-ExtraLightItalic.ttf",
+      "sha1": "cdb48490a752e60e2b15da5be3aec5cd061bdacd"
+    },
+    {
+      "path": "assetsf/fonts/Roboto_Condensed-Light.ttf",
+      "sha1": "1daf12253cbd45c84a4f3b04d2ccea83d40446cb"
+    }
+  ]
+}

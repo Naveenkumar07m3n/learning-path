@@ -1,0 +1,5 @@
+Feature	                   Old Architecture	      New Architecture
+Layout updates	         Asynchronous (laggy)	  Synchronous (instant)
+React 18 features	        Limited	              Fully supported
+JS ↔ Native communication	Slow bridge             Fast JSI
+Enabled by default	          No	               Yes (from 0.76)
