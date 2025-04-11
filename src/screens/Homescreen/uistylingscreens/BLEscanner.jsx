@@ -1,9 +1,7 @@
+// components/BLEScanner.js
 import React, { useState } from 'react';
-import styled from 'styled-components/native';
-import { FlatList, } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-
-
+import { FlatList } from 'react-native';
+import {Container,Title,Status,ScanButton,ButtonText,DeviceCard,DeviceName,DeviceId,} from '../../../utils/styles/Commonstyles'; // 👈 path might change based on folder structure
 
 const BLEScanner = () => {
   const [isScanning, setIsScanning] = useState(false);
@@ -26,13 +24,12 @@ const BLEScanner = () => {
       <Status>{isScanning ? 'Scanning for devices...' : 'Press scan to start searching'}</Status>
 
       <ScanButton onPress={handleScan}>
-        {/* <Icon name="bluetooth" size={20} color="#fff" /> */}
         <ButtonText>{isScanning ? 'Scanning...' : 'Start Scan'}</ButtonText>
       </ScanButton>
 
       <FlatList
         data={devices}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <DeviceCard>
             <DeviceName>{item.name || 'Unnamed Device'}</DeviceName>
@@ -43,59 +40,5 @@ const BLEScanner = () => {
     </Container>
   );
 };
-const Container = styled.SafeAreaView`
-  flex: 1;
-  background-color: #f5f7fa;
-  padding: 20px;
-`;
-
-const Title = styled.Text`
-  font-size: 28px;
-  font-weight: bold;
-  color: #1f2937;
-  margin-bottom: 10px;
-`;
-
-const Status = styled.Text`
-  font-size: 16px;
-  color: #6b7280;
-  margin-bottom: 20px;
-`;
-
-const ScanButton = styled.TouchableOpacity`
-  background-color: #3b82f6;
-  padding: 14px;
-  border-radius: 12px;
-  align-items: center;
-  margin-bottom: 20px;
-  flex-direction: row;
-  justify-content: center;
-`;
-
-const ButtonText = styled.Text`
-  color: white;
-  font-size: 16px;
-  margin-left: 8px;
-`;
-
-const DeviceCard = styled.View`
-  padding: 16px;
-  background-color: white;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
-  elevation: 3;
-`;
-
-const DeviceName = styled.Text`
-  font-size: 18px;
-  color: #111827;
-`;
-
-const DeviceId = styled.Text`
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 4px;
-`;
 
 export default BLEScanner;

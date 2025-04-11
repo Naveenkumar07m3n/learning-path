@@ -4,7 +4,7 @@ import { View, Alert,Button } from "react-native";
 import Form from "../../components/formcomponent/Form";
 import AppButton from "../../components/buttoncomponent/Button"; // if you're using a custom button
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -55,6 +55,14 @@ const RegisterScreen = () => {
     <View style={{ padding: 20 }}>
       <Form fields={registerFields} values={formData} onChange={handleChange} errors={errors} />
       <AppButton title="Register" onPress={handleSubmit} />
+      <AppButton
+        title="Go to Login"
+        onPress={() => navigation.navigate('LoginScreen',{
+          userName: 'naveen',
+        }
+        )}
+      />
+      
     </View>
   );
 };

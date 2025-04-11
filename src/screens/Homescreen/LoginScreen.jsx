@@ -36,7 +36,11 @@ import { View, Alert,Button } from "react-native";
 import Form from "../../components/formcomponent/Form";
 import AppButton from "../../components/buttoncomponent/Button"; // Or use <Button> if you don’t have this
 
-const LoginScreen = () => {
+const LoginScreen = ({route,navigation}) => {
+  const {  userName } = route.params ?? {};
+
+
+  console.log("RegisterRoutes",userName);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -86,6 +90,10 @@ const LoginScreen = () => {
     <View style={{ padding: 20 }}>
       <Form fields={loginFields} values={formData} onChange={handleChange} errors={errors} />
       <AppButton title="Login" onPress={handleSubmit} />
+      <AppButton
+        title="Go Gallary"
+        onPress={() => navigation.navigate('ImagesScreen')}
+      />
     </View>
   );
 };
