@@ -1,6 +1,6 @@
 // screens/RegisterScreen.js
 import React, { useState } from "react";
-import { View, Alert,Button } from "react-native";
+import { View, Alert, } from "react-native";
 import Form from "../../components/formcomponent/Form";
 import AppButton from "../../components/buttoncomponent/Button"; // if you're using a custom button
 
