@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, TextInput,TouchableOpacity } from "react-native";
+import styles  from "../../utils/styles/Commoncompontnt";
 
 const Form = ({ fields, values, onChange, errors = {} }) => {
   const [visiblePasswords, setVisiblePasswords] = useState({});
@@ -53,41 +54,5 @@ const Form = ({ fields, values, onChange, errors = {} }) => {
 
 export default Form;
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  label: {
-    marginBottom: 4,
-    fontWeight: "bold",
-  },
-  inputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    paddingHorizontal: 10,
-  },
-  input: {
-    flex: 1,
-    paddingVertical: 10,
-  },
-  toggleText: {
-    color: "#007bff",
-    marginLeft: 10,
-    fontWeight: "600",
-  },
-  errorText: {
-    color: "red",
-    fontSize: 12,
-    marginTop: 4,
-  },
-  inputError: {
-    borderColor: "red",
-  },
-});
+
 

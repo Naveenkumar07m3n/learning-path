@@ -34,7 +34,7 @@
 import React, { useState } from "react";
 import { View, Alert,Button } from "react-native";
 import Form from "../../components/formcomponent/Form";
-import AppButton from "../../components/buttoncomponent/Button"; // Or use <Button> if you don’t have this
+import AppButton from "../../components/buttoncomponent/Button"; //custom button component
 
 const LoginScreen = ({route,navigation}) => {
   const {  userName } = route.params ?? {};

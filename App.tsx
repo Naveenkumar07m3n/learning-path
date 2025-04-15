@@ -1,3 +1,5 @@
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
 import Greetings from "./src/components/Greetings";
@@ -19,13 +21,21 @@ import ImagesScreen from "./src/screens/Imagesscreens/ImagesScreen";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AppNavigator from "./src/navigation/AppNavigator";
+import RegisterStack from "./src/navigation/RegisterStack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+//Vecto icons for Tab navigation
+import Ionicons from 'react-native-vector-icons/Ionicons';
+// import { Ionicons } from '@expo/vector-icons';
+// import 'react-native-gesture-handler';
+import ProfileDrawer from "./src/navigation/ProfileDrawer";
 
 
 console.log("Environment:===>", Config.APP_ENV);
 console.log("API URL:", Config.API_URL);
 
 // const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
 
 const App = () =>{
 return(
@@ -38,8 +48,45 @@ return(
 // </NavigationContainer>
 
 <NavigationContainer>
-    <AppNavigator />
-  </NavigationContainer>
+<Tab.Navigator
+        screenOptions={{
+          // tabBarActiveTintColor: '#1e90ff',
+          tabBarActiveTintColor: 'green',
+          tabBarInactiveTintColor: 'gray',
+          headerShown: false,
+        }}
+      >
+        <Tab.Screen
+          name="Register"
+          component={RegisterStack}
+          options={{
+            tabBarIcon: ({color,size}) => 
+              <Ionicons name="person" color={color} size={size}
+              
+            />
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileDrawer}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="person-circle-outline" color={color} size={size} 
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="BLE"
+          component={BLEScanner}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="list-outline" color={color} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+</NavigationContainer>
 
   // <ScrollView>
   //         <View>
@@ -65,9 +112,9 @@ return(
   //       {/* <LoginScreen />
   //       <RegisterScreen /> */}
   //       //ui and styles ble scanner
-  //       {/* <BLEScanner />
-  //       <UserProfile /> 
-  //        <TodoApp /> */}
+        //  <BLEScanner />
+        // <UserProfile /> 
+        //  <TodoApp /> 
   //       //images implementation
   //       <ImagesScreen />
   // </ScrollView>
