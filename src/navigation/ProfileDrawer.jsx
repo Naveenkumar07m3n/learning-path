@@ -10,12 +10,12 @@ const Drawer = createDrawerNavigator();
 const ProfileDrawer = () => {
   return (
     <Drawer.Navigator
-    //   screenOptions={{
-    //     drawerType: 'front',
-    //     headerStyle: { backgroundColor: '#1e90ff' },
-    //     headerTintColor: '#fff',
-    //     drawerActiveTintColor: '#1e90ff',
-    //   }}
+      screenOptions={{
+        drawerType: 'front',
+        headerStyle: { backgroundColor: '#1e90ff' },
+        headerTintColor: '#fff',
+        drawerActiveTintColor: '#1e90ff',
+      }}
     >
       <Drawer.Screen name="User List" component={UserProfileList} />
       <Drawer.Screen name="Todo" component={TodoApp} />

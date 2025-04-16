@@ -28,7 +28,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // import { Ionicons } from '@expo/vector-icons';
 // import 'react-native-gesture-handler';
 import ProfileDrawer from "./src/navigation/ProfileDrawer";
-
+import Tabnaviagaion from './src/navigation/Tabnavigation';
+import { Provider } from 'react-redux';
+import { store } from './src/store/store'; // adjust path to your Redux store
 
 console.log("Environment:===>", Config.APP_ENV);
 console.log("API URL:", Config.API_URL);
@@ -46,47 +48,11 @@ return(
 //     <Stack.Screen name="LoginScreen" component={LoginScreen} />
 //   </Stack.Navigator>
 // </NavigationContainer>
-
-<NavigationContainer>
-<Tab.Navigator
-        screenOptions={{
-          // tabBarActiveTintColor: '#1e90ff',
-          tabBarActiveTintColor: 'green',
-          tabBarInactiveTintColor: 'gray',
-          headerShown: false,
-        }}
-      >
-        <Tab.Screen
-          name="Register"
-          component={RegisterStack}
-          options={{
-            tabBarIcon: ({color,size}) => 
-              <Ionicons name="person" color={color} size={size}
-              
-            />
-          }}
-        />
-        <Tab.Screen
-          name="Profile"
-          component={ProfileDrawer}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="person-circle-outline" color={color} size={size} 
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="BLE"
-          component={BLEScanner}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="list-outline" color={color} size={size} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-</NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+          <Tabnaviagaion /> 
+      </NavigationContainer>
+    </Provider>
 
   // <ScrollView>
   //         <View>

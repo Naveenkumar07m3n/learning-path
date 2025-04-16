@@ -1,42 +1,13 @@
-// import React, { useState } from "react";
-// import { View, Button } from "react-native";
-// import Form from "../../components/formcomponent/Form";
 
-// const LoginScreen = () => {
-//   const [formData, setFormData] = useState({
-//     email: "",
-//     password: "",
-//   });
-
-//   const handleChange = (name, value) => {
-//     setFormData((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = () => {
-//     console.log("Login Data:", formData);
-//   };
-
-//   const loginFields = [
-//     { name: "email", label: "Email", type: "email", placeholder: "Enter your email" },
-//     { name: "password", label: "Password", type: "password", placeholder: "Enter your password" },
-//   ];
-
-//   return (
-//     <View>
-//       <Form fields={loginFields} values={formData} onChange={handleChange} />
-//       <Button title="Login" onPress={handleSubmit} />
-//     </View>
-//   );
-// };
-
-// export default LoginScreen;
-// screens/LoginScreen.js
 import React, { useState } from "react";
 import { View, Alert,Button } from "react-native";
 import Form from "../../components/formcomponent/Form";
 import AppButton from "../../components/buttoncomponent/Button"; //custom button component
+import { useSelector } from 'react-redux';
 
 const LoginScreen = ({route,navigation}) => {
+  const registeredUser = useSelector((state) => state.user); // 👈 Get stored user
+  console.log("registeredUser==>",registeredUser)
   const {  userName } = route.params ?? {};
 
 
@@ -76,11 +47,21 @@ const LoginScreen = ({route,navigation}) => {
       return;
     }
 
-    // Success — Log or process login
-    console.log("Login Data:", formData);
-    Alert.alert("Success", "Logged in successfully!");
+    //  Validate against Redux state
+    console.log("formData==>",formData.email)
+    console.log("formData==>",formData.password)
+    console.log( "registeredUser.email", registeredUser.email)
+    console.log( "registeredUser.password", registeredUser.password)
+    if (
+      formData.email === registeredUser.email &&
+      formData.password === registeredUser.password
+    ) {
+      Alert.alert("Success", "Logged in successfully!");
+      navigation.navigate('ImagesScreen');
+    } else {
+      Alert.alert("Error", "Invalid email or password");
+    }
   };
-
   const loginFields = [
     { name: "email", label: "Email", type: "email", placeholder: "Enter your email" },
     { name: "password", label: "Password", type: "password", placeholder: "Enter your password" },
@@ -90,10 +71,10 @@ const LoginScreen = ({route,navigation}) => {
     <View style={{ padding: 20 }}>
       <Form fields={loginFields} values={formData} onChange={handleChange} errors={errors} />
       <AppButton title="Login" onPress={handleSubmit} />
-      <AppButton
+      {/* <AppButton
         title="Go Gallary"
         onPress={() => navigation.navigate('ImagesScreen')}
-      />
+      /> */}
     </View>
   );
 };
