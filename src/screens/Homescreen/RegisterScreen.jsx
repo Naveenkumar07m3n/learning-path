@@ -4,7 +4,12 @@ import { View, Alert, } from "react-native";
 import Form from "../../components/formcomponent/Form";
 import AppButton from "../../components/buttoncomponent/Button"; // if you're using a custom button
 
+import { registerUser } from '../../slice/authSlice'; //auth slice 
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../slice/authSlice';
+
 const RegisterScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -40,8 +45,13 @@ const RegisterScreen = ({ navigation }) => {
     }
 
     // All good — submit the data
+
+    // dispatch(registerUser(formData)); // <-- Save to Redux
+    dispatch(setUser(formData)); // 👈 Store user info
     console.log("Register Data:", formData);
     Alert.alert("Success", "Registered Successfully!");
+    navigation.navigate("LoginScreen");
+
   };
 
   const registerFields = [
