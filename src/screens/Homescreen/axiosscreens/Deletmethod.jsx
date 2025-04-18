@@ -1,18 +1,17 @@
 import React from 'react';
 import { View, Button, StyleSheet, Alert } from 'react-native';
-import axios from 'axios';
+import { deleteObject } from '../../../api/methods'; //  Import the centralized method
 
 const Deletmethod = () => {
   const handleDelete = async () => {
-    const objectId = 'YOUR_OBJECT_ID_HERE'; //  Replace with a real object ID
+    const objectId = 'YOUR_OBJECT_ID_HERE'; //  Replace this with a real ID or make it dynamic
 
     try {
-      const res = await axios.delete(`https://api.restful-api.dev/objects/${objectId}`);
+      const res = await deleteObject(objectId); //  Use shared delete method
       Alert.alert('Deleted', `Object with ID ${objectId} was deleted successfully.`);
-      console.log('DELETE Response:', res.data);
+      console.log('DELETE Response:', res);
     } catch (error) {
-      console.error('DELETE Error:', error);
-      Alert.alert('Error ', 'Failed to delete object.');
+      Alert.alert('Error', 'Failed to delete object.');
     }
   };
 

@@ -1,33 +1,24 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, Alert } from 'react-native';
-import axios from 'axios';
+import { postNewObject } from '../../../api/methods'; //  Import the shared API method
 
 const Postmethod = () => {
   const [createdObject, setCreatedObject] = useState(null);
 
-  const postNewObject = async () => {
+  const handlePostObject = async () => {
     try {
-      const res = await axios.post('https://api.restful-api.dev/objects', {
-        name: 'Naveen imac',
-        data: {
-          year: 2025,
-          CPU: 'Apple M4',
-          RAM: '32 GB'
-        }
-      });
-
-      setCreatedObject(res.data);
-      console.log("responseof post==>",res.data)
+      const res = await postNewObject(); //  Use centralized method
+      setCreatedObject(res);
+      console.log("responseof post ==>", res);
       Alert.alert('Success', 'Object created successfully!');
     } catch (error) {
-      console.error('POST Error:', error);
       Alert.alert('Error', 'Something went wrong while creating the object.');
     }
   };
 
   return (
     <View style={styles.container}>
-      <Button title="Create New Object" onPress={postNewObject} />
+      <Button title="Create New Object" onPress={handlePostObject} />
 
       {createdObject && (
         <View style={styles.result}>

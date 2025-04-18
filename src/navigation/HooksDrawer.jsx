@@ -7,6 +7,7 @@ import Todoreducer from '../screens/Homescreen/Todoreducer';
 import Hooksmemo from '../screens/Homescreen/Hooksmemo';
 import Mainscreencontext from '../screens/Homescreen/Mainscreencontext';
 import Reduxcounter from '../screens/Homescreen/Reduxcounter';
+import HooksCallback from '../screens/Homescreen/HooksCallback';
 
 const Drawer = createDrawerNavigator();
 
@@ -24,6 +25,7 @@ const HooksDrawer = () => {
       <Drawer.Screen name="Usereducer" component={Todoreducer} />
       <Drawer.Screen name="Usememo" component={Hooksmemo} />
       <Drawer.Screen name="Usecontext" component={Mainscreencontext} />
+      <Drawer.Screen name="UseCallback" component={HooksCallback} />
       {/* <Drawer.Screen name="Redux" component={Reduxcounter} /> */}
       {/* You can add more screens here if needed */}
     </Drawer.Navigator>

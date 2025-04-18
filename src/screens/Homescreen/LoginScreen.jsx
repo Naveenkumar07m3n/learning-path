@@ -1,17 +1,53 @@
 
-import React, { useState } from "react";
-import { View, Alert,Button } from "react-native";
+import React, { useState,useEffect } from "react";
+import { View, Alert,Button, } from "react-native";
 import Form from "../../components/formcomponent/Form";
 import AppButton from "../../components/buttoncomponent/Button"; //custom button component
 import { useSelector } from 'react-redux';
+import { MMKV } from 'react-native-mmkv';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = ({route,navigation}) => {
-  const registeredUser = useSelector((state) => state.user); // 👈 Get stored user
+  const registeredUser = useSelector((state) => state.user); //  Get stored user
   console.log("registeredUser==>",registeredUser)
   const {  userName } = route.params ?? {};
 
 
-  console.log("RegisterRoutes",userName);
+  const [storedUser, setStoredUser] = useState(null);  //  store retrieved user
+
+  // console.log('storedUser==>',storedUser)
+
+  useEffect(() => {
+    const fetchUser = async () => {                                      //-----<GetItem
+      try {
+        const savedUser = await AsyncStorage.getItem('registeredUser');
+        if (savedUser) {
+          setStoredUser(JSON.parse(savedUser));
+         
+        }
+      } catch (error) {
+        console.error('Error fetching user from storage:', error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+
+const storage = new MMKV();
+
+// Save a value
+storage.set('username', 'john_doe');
+
+// Read a value
+const username = storage.getString('username');
+console.log("mmkvgetString",username)
+
+// Delete a value
+storage.delete('username');
+ console.log("RegisterRoutes",userName);
+
+ 
   const [formData, setFormData] = useState({
     email: "",
     password: "",

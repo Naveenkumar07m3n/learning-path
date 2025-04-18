@@ -1,8 +1,9 @@
 import React, { createContext, useState } from 'react';
+import Hookscontext from '../Hookscontext';
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = () => {
   const [user, setUser] = useState(null);
 
   const login = (username) => {
@@ -15,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
+      <Hookscontext />
     </AuthContext.Provider>
   );
 };
