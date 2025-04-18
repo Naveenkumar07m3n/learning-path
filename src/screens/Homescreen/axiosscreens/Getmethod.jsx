@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
-import axios from 'axios';
+import { View,Text,FlatList, StyleSheet,ActivityIndicator,Alert,
+} from 'react-native';
+import { fetchObjects } from '../../../api/methods'; // Import from your API layer
 
 const Getmethod = () => {
   const [objects, setObjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchObjects = async () => {
+  const loadObjects = async () => {
+    setLoading(true);
     try {
-      const res = await axios.get('https://api.restful-api.dev/objects');
-      setObjects(res.data);
-      console.log("<==getmethod response==>",res.data)
-    } catch (error) {
-      console.error('GET Error:', error);
+      const data = await fetchObjects();
+      setObjects(data);
+    } catch {
+      Alert.alert('Error', 'Failed to fetch objects.');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchObjects();
+    loadObjects();
   }, []);
 
   if (loading) {

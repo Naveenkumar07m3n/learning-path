@@ -109,3 +109,24 @@ npm run android:prod
 # learning-path
 >>>>>>> 90bc11955807a60071442149a53d806558953920
 "# react-native-path" 
+// Save data
+storage.set('key', 'value');              // string
+storage.set('age', 25);                   // number
+storage.set('isLoggedIn', true);          // boolean
+
+// Read data
+storage.getString('key');                 // returns string | undefined
+storage.getNumber('age');                 // returns number | undefined
+storage.getBoolean('isLoggedIn');         // returns boolean | undefined
+
+// Check if a key exists
+storage.contains('key');                  // returns true or false
+
+// Delete a key
+storage.delete('key');
+
+// Get all keys
+storage.getAllKeys();                     // returns string[]
+
+// Clear all keys
+storage.clearAll();

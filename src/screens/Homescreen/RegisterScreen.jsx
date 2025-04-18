@@ -1,10 +1,11 @@
-// screens/RegisterScreen.js
-import React, { useState } from "react";
-import { View, Alert, } from "react-native";
-import Form from "../../components/formcomponent/Form";
-import AppButton from "../../components/buttoncomponent/Button"; // if you're using a custom button
 
-import { registerUser } from '../../slice/authSlice'; //auth slice 
+import React, { useState } from "react";
+import { View, Alert } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage'; // <-- Import
+
+import Form from "../../components/formcomponent/Form";
+import AppButton from "../../components/buttoncomponent/Button";
+
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../slice/authSlice';
 
@@ -29,13 +30,26 @@ const RegisterScreen = ({ navigation }) => {
     return pattern.test(email);
   };
 
-  const handleSubmit = () => {
+
+
+  //  Save data to AsyncStorage
+  const storeUserData = async (data) => {                                          //-----<setIteam
+    try {
+      await AsyncStorage.setItem('registeredUser', JSON.stringify(data));
+      console.log('User data stored in AsyncStorage');
+    } catch (error) {
+      console.error('Failed to save user data:', error);
+    }
+  };
+
+
+
+  const handleSubmit = async () => {
     const newErrors = {};
 
     if (!formData.username) newErrors.username = "Username is required";
     if (!formData.email) newErrors.email = "Email is required";
     else if (!validateEmail(formData.email)) newErrors.email = "Invalid email address";
-
     if (!formData.password) newErrors.password = "Password is required";
     if (!formData.phone) newErrors.phone = "Phone number is required";
 
@@ -44,14 +58,14 @@ const RegisterScreen = ({ navigation }) => {
       return;
     }
 
-    // All good — submit the data
+    //  Store in Redux
+    dispatch(setUser(formData));
 
-    // dispatch(registerUser(formData)); // <-- Save to Redux
-    dispatch(setUser(formData)); // 👈 Store user info
-    console.log("Register Data:", formData);
+    //  Store in AsyncStorage
+    await storeUserData(formData);
+//
     Alert.alert("Success", "Registered Successfully!");
     navigation.navigate("LoginScreen");
-
   };
 
   const registerFields = [
@@ -67,12 +81,10 @@ const RegisterScreen = ({ navigation }) => {
       <AppButton title="Register" onPress={handleSubmit} />
       <AppButton
         title="Go to Login"
-        onPress={() => navigation.navigate('LoginScreen',{
+        onPress={() => navigation.navigate('LoginScreen', {
           userName: 'naveen',
-        }
-        )}
+        })}
       />
-      
     </View>
   );
 };
