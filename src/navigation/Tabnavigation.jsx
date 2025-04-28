@@ -10,6 +10,8 @@ import Hooksimp from '../screens/Homescreen/Hooksimp';
 import HooksDrawer from './HooksDrawer';
 import Getmethod from '../screens/Homescreen/axiosscreens/Getmethod';
 import Apidrawer from './Apidrawer';
+import WeatherScreen from '../screens/Homescreen/NewsScreen';
+import NewsScreen from '../screens/Homescreen/NewsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -55,6 +57,15 @@ const Tabnaviagaion = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="outline" color={color} size={size} />
+          ),
+        }}
+      />
+        <Tab.Screen
+        name="news"
+        component={NewsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="list-outline" color={color} size={size} />
           ),
         }}
       />

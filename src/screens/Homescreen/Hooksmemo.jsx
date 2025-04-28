@@ -13,7 +13,7 @@ const Hooksmemo = () => {
   const [search, setSearch] = useState('');
 
   const filteredUsers = useMemo(() => {
-    console.log('Filtering users...');
+    //filtering the user
     return users.filter(user =>
       user.name.toLowerCase().includes(search.toLowerCase())
     );
